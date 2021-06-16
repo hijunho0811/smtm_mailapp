@@ -85,6 +85,8 @@ public class EmailGUI extends JFrame {
                     for (File file : droppedFiles) {
                         //process files
                         file_append = file;
+                        if(file_append != null)
+                            file_name.setText(file_append.getName());
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
