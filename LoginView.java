@@ -8,26 +8,35 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.List;
 
 import javax.swing.*;
 
-
+class Property{
+    String smtp_server;
+    int port;
+    String id;
+    String passwd;
+    String mailid;
+}
 
 public class LoginView extends JFrame{
 
     private JButton btnLogin;
     private JButton btnInit;
-    private JPasswordField passText;
+    private JTextField passText;
     private JTextField userText;
-    private boolean bLoginCheck;
-    private JCheckBox chckbxNewCheckBox;
-    private JCheckBox chckbxNewCheckBox_1;
+    private Property p = new Property();
+    private String email_type;
+
 
 
 
     public void placeLoginPanel(){
+
         setTitle("로그인");
         setSize(280, 170);
         setResizable(false);
@@ -43,16 +52,43 @@ public class LoginView extends JFrame{
         // visiible
         setVisible(true);
 
-        chckbxNewCheckBox = new JCheckBox("Naver");
-        chckbxNewCheckBox.setBounds(50, 5, 80, 25);
-        panel.add(chckbxNewCheckBox);
+        JCheckBox naver_check = new JCheckBox("Naver");
+        naver_check.setBounds(50, 5, 80, 25);
+        panel.add(naver_check);
+        naver_check.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {//checkbox has been selected
+                    //do something...
+                    p.smtp_server = "smtp.naver.com";
+                    p.port = 587;
+                    email_type = "@naver.com";
 
-        chckbxNewCheckBox_1 = new JCheckBox("Gmail");
-        chckbxNewCheckBox_1.setBounds(150, 5, 80, 25);
-        panel.add(chckbxNewCheckBox_1);
+                }
+
+            }
+        });
+
+        JCheckBox gmail_check = new JCheckBox("Gmail");
+        gmail_check.setBounds(150, 5, 80, 25);
+        panel.add(gmail_check);
+        gmail_check.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {//checkbox has been selected
+                    //do something...
+                    p.smtp_server = "smtp.gmail.com";
+                    p.port = 465;
+                    email_type = "@gmail.com";
+
+                }
+
+            }
+        });
 
         ButtonGroup bg = new ButtonGroup(); // 체크박스 여러개 중 하나만 선택되도록 설정
-        bg.add(chckbxNewCheckBox); bg.add(chckbxNewCheckBox_1);
+        bg.add(naver_check);
+        bg.add(gmail_check);
 
         panel.setLayout(null);
         JLabel userLabel = new JLabel("이메일");
@@ -67,7 +103,7 @@ public class LoginView extends JFrame{
         userText.setBounds(100, 30, 160, 25);
         panel.add(userText);
 
-        passText = new JPasswordField(20);
+        passText = new JTextField(20);
         passText.setBounds(100, 60, 160, 25);
         panel.add(passText);
         passText.addActionListener(new ActionListener() {
@@ -97,25 +133,13 @@ public class LoginView extends JFrame{
                 JOptionPane.showMessageDialog(null, "환영합니다.");
                 EmailGUI emailg = new EmailGUI();
                 dispose();
-                emailg.email_guicall();
+                p.id = userText.getText();
+                p.passwd = passText.getText();
+                p.mailid = p.id+email_type;
+                emailg.email_guicall(p);
             }
         });
     }
-
-    //임시 아이디:test 임시 비밀번호:1234
-//    public void isLoginCheck(){
-//        if(userText.getText().equals("test") && new String(passText.getPassword()).equals("1234")){
-//            JOptionPane.showMessageDialog(null, "환영합니다.");
-//            bLoginCheck = true;
-//
-//            // 로그인 성공이라면 매니져창 뛰우기
-//            if(isLogin()){
-//                main.showFrameTest(); // 메인창 메소드를 이용해 창뛰우기
-//            }
-//        }else{
-//            JOptionPane.showMessageDialog(null, "Faild");
-//        }
-//    }
 
 
 }
