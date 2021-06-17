@@ -5,11 +5,11 @@ SMTP 프로토콜을 이용한 자바 메일 발송 어플리케이션
 
 ================================================================================
 
-##Naver
+- Naver
 
 https://guide.worksmobile.com/kr/mail/mail-guide/settings/pop3-imap-smtp/
 
-##Gmail
+- Gmail
 
 https://support.google.com/mail/answer/7126229/ki%E1%BB%83m-tra-gmail-th%C3%B4ng-qua-c%C3%A1c-n%E1%BB%81n-t%E1%BA%A3ng-email-kh%C3%A1c?hl=ko
 
