@@ -167,7 +167,7 @@ public class EmailGUI extends JFrame {
             // 보내는 사람 설정
             email.setFrom(p.mailid, p.id ,"utf-8");
             // 받는 사람 설정
-            email.addTo(reciever, "수신인" , "utf-8");
+            email.addTo(reciever, reciever , "utf-8");
             // 받는사람(참조인) 설정
             //email.addCc(email, name, charset);
             // 받는사람(숨은참조인) 설정
@@ -244,9 +244,9 @@ public class EmailGUI extends JFrame {
         String result = "fail";
         try {
             // 보내는 사람 설정
-            email.setFrom(p.mailid, "공준호", "utf-8");
+            email.setFrom(p.mailid, p.id , "utf-8");
             // 받는 사람 설정
-            email.addTo(reciever, "수신인", "utf-8");
+            email.addTo(reciever, reciever, "utf-8");
             // 받는사람(참조인) 설정
             //email.addCc(email, name, charset);
             // 받는사람(숨은참조인) 설정
